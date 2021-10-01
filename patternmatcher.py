@@ -3,6 +3,11 @@ from dataclasses import dataclass
 
 @dataclass
 class Point:
+    """`Point` dataclass example for pattern matching.
+
+    Note: dataclasses by default will add `__match_args__` for
+    sequential variable matching.
+    """
     x: int
     y: int
 

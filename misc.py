@@ -2,6 +2,8 @@ from contextlib import ExitStack
 from itertools import zip_longest
 
 # Context managers
+# 5 ways to have nested context managers.
+# 4th method is added in 3.10.
 
 
 with open("typehints.py") as foo, open("typehints.py") as bar:
@@ -70,7 +72,11 @@ class Point:
 
 
 class Record1:
-    __slots__ = ("x", "y")
+    """Record class with `x` and `y` attributes in slots.
+
+    This allows the faster attribute access and use less memory.
+    """
+    __slots__ = ("x", "y")  # Annoying to write
 
     def __init__(self, x: int, y: int) -> None:
         self.x = x
@@ -79,11 +85,10 @@ class Record1:
     def __str__(self) -> str:
         ...
 
-    def get_x(self):
-        return self.x
-
 
 @dataclass(slots=True)
 class Record2:
+    """Record class with slots using new dataclass option.
+    """
     x: int
     y: int
