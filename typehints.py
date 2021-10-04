@@ -1,4 +1,14 @@
-from typing import Callable, Iterable, Iterator, ParamSpec, TypeAlias, TypeVar, Union
+from typing import (
+    Any,
+    Callable,
+    Iterable,
+    Iterator,
+    ParamSpec,
+    TypeAlias,
+    TypeGuard,
+    TypeVar,
+    Union,
+)
 
 from contextlib import contextmanager
 
@@ -27,6 +37,7 @@ T = TypeVar("T")
 def return_list(fn: Callable[P, Iterable[T]]) -> Callable[P, list[T]]:
     def _new_fn(*args: P.args, **kwargs: P.kwargs):
         return list(fn(*args, **kwargs))
+
     return _new_fn
 
 
@@ -39,14 +50,12 @@ def generate_integers(limit: int) -> Iterator[int]:
 integer_to_5: list[int] = generate_integers(5)
 
 
-# PEP 613
+# PEP 613: Type aliases
 
-# Type aliases
 Nodes = set[int]
 ClientStr = "DBClient"  # here type of `Client` is str
 
 ClientAlias: TypeAlias = "DBClient"
-
 
 
 class DBClient:
@@ -54,3 +63,26 @@ class DBClient:
 
 
 client: ClientAlias = DBClient()
+
+
+# PEP 647: Type guards
+
+
+def is_string_list(strings: list[Any]) -> TypeGuard[list[str]]:
+    """Now type checkers know if this evaluates to True
+    `strings` is a `list[str]`
+    """
+    return all(isinstance(string, str) for string in strings)
+
+
+def is_string_list_no_guard(strings: list[Any]) -> bool:
+    return all(isinstance(string, str) for string in strings)
+
+
+a = ["", "", 1, 2]
+if is_string_list_no_guard(a):
+    print(a)  # Here the type is list[unknown]
+
+
+if is_string_list(a):
+    print(a)  # Whereas here a is list[str]
