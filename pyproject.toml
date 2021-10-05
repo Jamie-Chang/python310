@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "python310"
+version = "0.1.0"
+description = ""
+authors = ["Jamie Chang <jamie.chang@playtech.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ipykernel = "^6.4.1"
+nbconvert = "^6.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
