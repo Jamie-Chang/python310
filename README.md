@@ -5,10 +5,10 @@ Note: This does not cover all the changes in 3.10, consult the changelogs and PE
 
 
 ## Notable Changes
-1. [Pattern Matching](./patternmatcher.py)
-2. [Type Changes](./typehints.py)
-3. [AsyncIO Changes](./asyncchanges.py)
-4. [Other Changes](./misc.py)
+1. [Pattern Matching](./patternmatcher.ipynb)
+2. [Type Changes](./typehints.ipynb)
+3. [AsyncIO Changes](./asyncchanges.ipynb)
+4. [Other Changes](./misc.ipynb)
 
 
 ## Additional Reading
